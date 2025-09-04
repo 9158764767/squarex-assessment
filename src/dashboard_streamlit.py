@@ -919,3 +919,19 @@ st.caption(
     "Notes: heuristic domain→app mapping; regex-based sensitive classification. "
     "Materialize with 'events_enriched_mat' in prepare_db.py to avoid UDF dependencies."
 )
+
+# --- Ensure DB dir exists and build DB on first run (Streamlit Cloud safe) ---
+from prepare_db import main as build_db
+DB_PATH.parent.mkdir(parents=True, exist_ok=True)  # make ./db/ if missing
+try:
+    # If DB file is missing, build it from data/
+    if not DB_PATH.exists():
+        import streamlit as st
+        st.info("Initializing database from data/…")
+        build_db()
+except Exception as e:
+    # Provide a friendly error if data/ is empty or something else goes wrong
+    import streamlit as st
+    st.error(f"Database initialization failed: {e}")
+# ----------------------------------------------------------------------------- 
+
