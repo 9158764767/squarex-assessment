@@ -1,0 +1,6 @@
+﻿duckdb==1.0.0
+pandas>=2.0
+python-dateutil>=2.8.2
+plotly>=5.22
+streamlit>=1.36
+kaleido>=0.2.1

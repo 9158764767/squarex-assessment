@@ -1,0 +1,18 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+# Project artifacts
+db/
+outputs/
+*.duckdb
+# Local data (keep only SAFE sample files)
+data/*
+!data/sample_*.json
+!data/sample_*.jsonl
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
