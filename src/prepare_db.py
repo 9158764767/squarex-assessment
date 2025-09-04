@@ -230,6 +230,7 @@ Build local DuckDB and stage events from ./data JSON files.
 - Materializes events_enriched -> events_enriched_mat to avoid UDF dependency later
 """
 
+
 import os, glob, json, re
 from pathlib import Path
 from typing import Dict, Any, List
@@ -241,10 +242,18 @@ from typing import Dict, Any, List, Optional
 
 from classify_sensitive import classify_text
 
-# --- Paths ---
+import os
+from pathlib import Path
+# ...
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
-DB_DIR = ROOT / "db"
+DB_DIR_DEFAULT = ROOT / "db"
+
+# Use env var if provided (so dashboard can set /tmp on Streamlit Cloud)
+DB_PATH = Path(os.environ.get("SQUAREX_DB_PATH", str(DB_DIR_DEFAULT / "squarex.duckdb")))
+DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+# --- Paths ---
+
 OUT_DIR = ROOT / "outputs"
 DB_PATH = DB_DIR / "squarex.duckdb"
 
