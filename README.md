@@ -1,0 +1,1 @@
+# squarex-assessment
